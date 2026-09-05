@@ -1,4 +1,4 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,25 +37,49 @@
         header h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
         header p { margin: 8px 0 0 0; opacity: 0.9; font-size: 15px; }
         
-        /* Stats Dashboard Panel */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        /* TEAM PLACED AT THE TOP NOW */
+        .top-team-box {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
             text-align: center;
         }
-        .stat-card {
-            background: var(--card);
-            padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
-            border: 1px solid #e2e8f0;
+        .team-title {
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
         }
-        .stat-num { font-size: 18px; font-weight: 700; color: var(--primary); }
-        .stat-label { font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 600; }
+        .team-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .member-row {
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #f1f5f9;
+        }
+        .member-name { font-weight: 700; color: #1e293b; font-size: 13.5px; }
+        .member-role {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+        .role-founder { background: #dbeafe; color: #1e40af; }
+        .role-cofounder { background: #d1fae5; color: #065f46; }
+        .role-marketing { background: #fef3c7; color: #92400e; }
 
-        /* Dynamic Grade Chooser Section */
         .grade-section { margin-bottom: 25px; }
         .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; padding-left: 5px; color: #475569; }
         .grade-tabs {
@@ -63,9 +87,7 @@
             gap: 8px;
             overflow-x: auto;
             padding-bottom: 8px;
-            scrollbar-width: none; /* Hide scrollbar for clean look */
         }
-        .grade-tabs::-webkit-scrollbar { display: none; }
         .grade-btn {
             background: var(--card);
             border: 1px solid #e2e8f0;
@@ -76,23 +98,19 @@
             color: var(--text);
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.2s;
         }
         .grade-btn.active {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
-        /* Material Content Display Panel */
         .content-panel {
             background: var(--card);
             border-radius: 16px;
             padding: 22px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            border: 1px solid #f1f5f9;
         }
         .panel-heading { font-size: 20px; margin: 0 0 18px 0; color: var(--text); font-weight: 700; }
         .resource-options {
@@ -110,56 +128,16 @@
             text-decoration: none;
             color: var(--text);
             font-weight: 600;
-            font-size: 15px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
         }
-        .resource-card:active { transform: scale(0.98); background: #f1f5f9; }
         .resource-card span.badge {
             background: var(--secondary);
             color: white;
             padding: 5px 10px;
             font-size: 11px;
-            font-weight: 700;
             border-radius: 6px;
-            text-transform: uppercase;
         }
         .resource-card.sample span.badge { background: #f59e0b; }
 
-        /* Massive Interactive Trivia Hub (High Scrolling Retention) */
-        .trivia-hub {
-            background: linear-gradient(135deg, #ffffff, #f5f3ff);
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border: 1px solid #e9e3ff;
-        }
-        .trivia-heading { font-size: 18px; margin: 0 0 15px 0; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; }
-        .live-fact-box {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 4px solid var(--accent);
-            font-size: 14px;
-            font-weight: 500;
-            color: #4c1d95;
-            margin-bottom: 15px;
-        }
-        .gen-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);
-        }
-
-        /* Scrollable Infinite Feed Section */
         .fact-feed { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
         .feed-item {
             background: var(--card);
@@ -176,81 +154,47 @@
             color: #0369a1;
             padding: 3px 8px;
             border-radius: 4px;
-            text-transform: uppercase;
             margin-bottom: 8px;
         }
-        .feed-item h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text); font-weight: 700; }
+        .feed-item h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text); }
         .feed-item p { margin: 0; font-size: 13.5px; color: #475569; }
 
-        /* Leadership Footer Cards */
         footer {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 24px 15px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
             text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-        .team-title {
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 1.5px;
-        }
-        .team-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .member-row {
-            background: #f8fafc;
-            padding: 10px 15px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #f1f5f9;
-        }
-        .member-name { font-weight: 700; color: #1e293b; font-size: 14px; }
-        .member-role {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 6px;
-        }
-        .role-founder { background: #dbeafe; color: #1e40af; }
-        .role-cofounder { background: #d1fae5; color: #065f46; }
-        .role-marketing { background: #fef3c7; color: #92400e; }
-        
-        .copyright {
-            font-size: 12px;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 15px;
-            margin: 0;
+            padding: 20px;
             color: #94a3b8;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header Banner -->
         <header>
             <h1>Smart Study Hub</h1>
             <p>Your Ultimate Interactive Learning Network</p>
         </header>
 
-        <!-- Stats Bar Overview -->
-        <div class="stats-bar">
-            <div class="stat-card"><div class="stat-num">7+</div><div class="stat-label">Grades</div></div>
-            <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">MCQs</div></div>
-            <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Free</div></div>
+        <!-- LEADERSHIP NOW STANDS PROUDLY AT THE TOP -->
+        <div class="top-team-box">
+            <div class="team-title">FOUNDING LEADERSHIP BOARD</div>
+            <div class="team-grid">
+                <div class="member-row">
+                    <span class="member-name">1) Rakshan</span>
+                    <span class="member-role role-founder">Founder</span>
+                </div>
+                <div class="member-row">
+                    <span class="member-name">2) Jeevith</span>
+                    <span class="member-role role-cofounder">Co-Founder</span>
+                </div>
+                <div class="member-row">
+                    <span class="member-name">3) Aditya</span>
+                    <span class="member-role role-marketing">Marketing Head</span>
+                </div>
+            </div>
         </div>
 
-        <!-- Grade Selector Strip (Including Grades 6,7,8,9,10,11,12) -->
+        <!-- Grade Selector -->
         <div class="grade-section">
             <div class="section-title">Select Your Academic Grade:</div>
             <div class="grade-tabs">
@@ -264,12 +208,53 @@
             </div>
         </div>
 
-        <!-- Material Resource Window -->
+        <!-- Resource Area -->
         <div class="content-panel">
             <h2 id="current-grade-title" class="panel-heading">Grade 6 Resources</h2>
             <div class="resource-options">
                 <a href="#" class="resource-card" onclick="alert('MCQ Practice test database loading...')">
                     <span>📝 Launch Interactive MCQ Test</span>
                     <span class="badge">Quiz Portal</span>
-    </a>
+                </a>
+                <a href="#" class="resource-card sample" onclick="alert('Downloading Sample Question Paper...')">
+                    <span>📄 Access Official Sample Question Paper</span>
+                    <span class="badge">Download PDF</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- MASSIVE SCROLL FEED -->
+        <div class="section-title">📚 Mega Study Facts Feed (Scroll Below)</div>
+        <div class="fact-feed">
+            <div class="feed-item">
+                <span class="feed-tag">Memory Science</span>
+                <h4>The Zeigarnik Effect</h4>
+                <p>Your brain naturally tracks uncompleted tasks better than completed ones. Taking planned breaks mid-problem makes you more likely to remember the concept long-term!</p>
+            </div>
+            
+            <div class="feed-item">
+                <span class="feed-tag">Biology Focus</span>
+                <h4>Blue Light vs Retinal Focus</h4>
+                <p>Looking at blue light screens right before studying drops reading comprehension speed by up to 22%. Switch to a physical book or use eye comfort warm-mode filters.</p>
+            </div>
+
+            <div class="feed-item">
+                <span class="feed-tag">Cognitive Hack</span>
+                <h4>The Feynman Secret Formula</h4>
+                <p>If you cannot explain a highly complicated concept to a 10-year-old child using basic everyday terms, you do not fully grasp that concept yourself yet.</p>
+            </div>
+
+            <div class="feed-item">
+                <span class="feed-tag">Neuroscience</span>
+                <h4>Scent-Induced Memory Triggers</h4>
+                <p>Chewing a specific rare flavor of chewing gum while studying, and then chewing that exact same flavor during your test, triggers instant contextual memory recall inside the brain.</p>
+            </div>
+
+            <div class="feed-item">
+                <span class="feed-tag">Study Optimization</span>
+                <h4>The Curve of Forgetting</h4>
+                <p>Without review, your brain dumps up to 80% of newly learned information within 48 hours. Reviewing your content for just 5 minutes daily resets this memory decay loop back to 100%.</p>
+            </div>
+
+
     
