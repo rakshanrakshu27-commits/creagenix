@@ -1,18 +1,21 @@
-<!DOCTYPE html>
+                <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Study Hub</title>
     <style>
+        /* 🎨 THEME CONFIGURATION BOX: CHANGE COLORS HERE */
         :root {
-            --primary: #2563eb;
-            --secondary: #10b981;
-            --background: #f8fafc;
-            --text: #1e293b;
-            --card: #ffffff;
-            --accent: #8b5cf6;
+            --primary: #2563eb;       /* Main buttons and accents */
+            --secondary: #10b981;     /* Quiz portal badge color */
+            --background: #f8fafc;    /* Website background color */
+            --text: #1e293b;          /* Main text color */
+            --card: #ffffff;          /* White panel cards background */
+            --accent: #8b5cf6;        /* Gradient secondary color */
+            --premium-color: #f59e0b; /* Golden Yellow for Premium Accent */
         }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--background);
@@ -28,7 +31,7 @@
         header {
             text-align: center;
             padding: 30px 15px;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             border-radius: 16px;
             margin-bottom: 25px;
@@ -37,7 +40,139 @@
         header h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
         header p { margin: 8px 0 0 0; opacity: 0.9; font-size: 15px; }
         
-        /* TEAM PLACED AT THE TOP NOW */
+        .grade-section { margin-bottom: 25px; }
+        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; padding-left: 5px; color: #475569; }
+        .grade-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        .grade-btn {
+            background: var(--card);
+            border: 1px solid #e2e8f0;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .grade-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .content-panel {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        .panel-heading { font-size: 20px; margin: 0 0 18px 0; color: var(--text); font-weight: 700; }
+        .resource-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .resource-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+        }
+        .resource-card span.badge {
+            background: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            font-size: 11px;
+            border-radius: 6px;
+        }
+        .resource-card.sample span.badge { background: #f59e0b; }
+
+        /* PREMIUM PLAN BOX */
+        .premium-panel {
+            background: linear-gradient(135deg, #fffbeb, #fff7ed);
+            border: 2px dashed var(--premium-color);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .premium-badge-top {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--premium-color);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .premium-features {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        .premium-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pay-now-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #d97706, var(--premium-color));
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .pay-now-btn:active { transform: scale(0.98); }
+
+        .fact-feed { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
+        .feed-item {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .feed-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .feed-item h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text); }
+        .feed-item p { margin: 0; font-size: 13.5px; color: #475569; }
+
+        /* LEADERSHIP RE-POSITIONED AT THE BOTTOM */
         .top-team-box {
             background: var(--card);
             border-radius: 16px;
@@ -80,85 +215,6 @@
         .role-cofounder { background: #d1fae5; color: #065f46; }
         .role-marketing { background: #fef3c7; color: #92400e; }
 
-        .grade-section { margin-bottom: 25px; }
-        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; padding-left: 5px; color: #475569; }
-        .grade-tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-        }
-        .grade-btn {
-            background: var(--card);
-            border: 1px solid #e2e8f0;
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .grade-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .content-panel {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-        .panel-heading { font-size: 20px; margin: 0 0 18px 0; color: var(--text); font-weight: 700; }
-        .resource-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .resource-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px;
-            background: #f8fafc;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-        }
-        .resource-card span.badge {
-            background: var(--secondary);
-            color: white;
-            padding: 5px 10px;
-            font-size: 11px;
-            border-radius: 6px;
-        }
-        .resource-card.sample span.badge { background: #f59e0b; }
-
-        .fact-feed { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
-        .feed-item {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-        }
-        .feed-tag {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-        .feed-item h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text); }
-        .feed-item p { margin: 0; font-size: 13.5px; color: #475569; }
-
         footer {
             text-align: center;
             padding: 20px;
@@ -171,40 +227,21 @@
 
     <div class="container">
         <header>
-            <h1>Smart Study Hub</h1>
-            <p>Your Ultimate Interactive Learning Network</p>
+            <h1 id="site-title">Smart Study Hub</h1>
+            <p id="site-tagline">Your Ultimate Interactive Learning Network</p>
         </header>
-
-        <!-- LEADERSHIP NOW STANDS PROUDLY AT THE TOP -->
-        <div class="top-team-box">
-            <div class="team-title">FOUNDING LEADERSHIP BOARD</div>
-            <div class="team-grid">
-                <div class="member-row">
-                    <span class="member-name">1) Rakshan</span>
-                    <span class="member-role role-founder">Founder</span>
-                </div>
-                <div class="member-row">
-                    <span class="member-name">2) Jeevith</span>
-                    <span class="member-role role-cofounder">Co-Founder</span>
-                </div>
-                <div class="member-row">
-                    <span class="member-name">3) Aditya</span>
-                    <span class="member-role role-marketing">Marketing Head</span>
-                </div>
-            </div>
-        </div>
 
         <!-- Grade Selector -->
         <div class="grade-section">
             <div class="section-title">Select Your Academic Grade:</div>
             <div class="grade-tabs">
-                <button class="grade-btn active" onclick="switchGrade('Grade 6')">Grade 6</button>
-                <button class="grade-btn" onclick="switchGrade('Grade 7')">Grade 7</button>
-                <button class="grade-btn" onclick="switchGrade('Grade 8')">Grade 8</button>
-                <button class="grade-btn" onclick="switchGrade('Grade 9')">Grade 9</button>
-                <button class="grade-btn" onclick="switchGrade('Grade 10')">Grade 10</button>
-                <button class="grade-btn" onclick="switchGrade('Grade 11')">Grade 11</button>
-                <button class="grade-btn" onclick="switchGrade('Grade 12')">Grade 12</button>
+                <button class="grade-btn active" onclick="switchGrade(this, 'Grade 6')">Grade 6</button>
+                <button class="grade-btn" onclick="switchGrade(this, 'Grade 7')">Grade 7</button>
+                <button class="grade-btn" onclick="switchGrade(this, 'Grade 8')">Grade 8</button>
+                <button class="grade-btn" onclick="switchGrade(this, 'Grade 9')">Grade 9</button>
+                <button class="grade-btn" onclick="switchGrade(this, 'Grade 10')">Grade 10</button>
+                <button class="grade-btn" onclick="switchGrade(this, 'Grade 11')">Grade 11</button>
+                <button class="grade-btn" onclick="switchGrade(this, 'Grade 12')">Grade 12</button>
             </div>
         </div>
 
@@ -212,49 +249,25 @@
         <div class="content-panel">
             <h2 id="current-grade-title" class="panel-heading">Grade 6 Resources</h2>
             <div class="resource-options">
-                <a href="#" class="resource-card" onclick="alert('MCQ Practice test database loading...')">
+                <a href="#" class="resource-card" id="quiz-btn" onclick="launchQuiz()">
                     <span>📝 Launch Interactive MCQ Test</span>
                     <span class="badge">Quiz Portal</span>
                 </a>
-                <a href="#" class="resource-card sample" onclick="alert('Downloading Sample Question Paper...')">
+                <a href="#" class="resource-card sample" id="pdf-btn" onclick="downloadPDF()">
                     <span>📄 Access Official Sample Question Paper</span>
                     <span class="badge">Download PDF</span>
                 </a>
             </div>
         </div>
 
-        <!-- MASSIVE SCROLL FEED -->
-        <div class="section-title">📚 Mega Study Facts Feed (Scroll Below)</div>
-        <div class="fact-feed">
-            <div class="feed-item">
-                <span class="feed-tag">Memory Science</span>
-                <h4>The Zeigarnik Effect</h4>
-                <p>Your brain naturally tracks uncompleted tasks better than completed ones. Taking planned breaks mid-problem makes you more likely to remember the concept long-term!</p>
-            </div>
+        <!-- NEW PREMIUM MEMBERSHIP SECTOR -->
+        <div class="premium-panel">
+            <div class="premium-badge-top">BEST VALUE</div>
+            <h2 class="panel-heading" style="color: #b45309; margin-bottom: 5px;">🚀 Upgrade to Premium</h2>
+            <p style="margin: 0; font-size: 14px; color: #b45309; font-weight: 600;">Unlock elite resources for just ₹99!</p>
             
-            <div class="feed-item">
-                <span class="feed-tag">Biology Focus</span>
-                <h4>Blue Light vs Retinal Focus</h4>
-                <p>Looking at blue light screens right before studying drops reading comprehension speed by up to 22%. Switch to a physical book or use eye comfort warm-mode filters.</p>
-            </div>
-
-            <div class="feed-item">
-                <span class="feed-tag">Cognitive Hack</span>
-                <h4>The Feynman Secret Formula</h4>
-                <p>If you cannot explain a highly complicated concept to a 10-year-old child using basic everyday terms, you do not fully grasp that concept yourself yet.</p>
-            </div>
-
-            <div class="feed-item">
-                <span class="feed-tag">Neuroscience</span>
-                <h4>Scent-Induced Memory Triggers</h4>
-                <p>Chewing a specific rare flavor of chewing gum while studying, and then chewing that exact same flavor during your test, triggers instant contextual memory recall inside the brain.</p>
-            </div>
-
-            <div class="feed-item">
-                <span class="feed-tag">Study Optimization</span>
-                <h4>The Curve of Forgetting</h4>
-                <p>Without review, your brain dumps up to 80% of newly learned information within 48 hours. Reviewing your content for just 5 minutes daily resets this memory decay loop back to 100%.</p>
-            </div>
-
-
+            <ul class="premium-features">
+                <li>✨ Complete Architectural & Concept Diagrams</li>
+                <li>📚 Extra High-Yield Practice Mock Question Papers</li>
+                <li>🧠 In-depth Step-by-Step Explanations for Complex Concepts</li>
     
