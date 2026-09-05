@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Portal</title>
+    <title>Smart Study Hub</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -11,6 +11,7 @@
             --background: #f8fafc;
             --text: #1e293b;
             --card: #ffffff;
+            --accent: #8b5cf6;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -18,52 +19,60 @@
             color: var(--text);
             margin: 0;
             padding: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         .container {
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto 40px auto;
         }
         header {
             text-align: center;
-            padding: 20px 0;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 30px 15px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: white;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-        header h1 { margin: 0; font-size: 24px; }
-        header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 14px; }
-        
-        /* Info Box */
-        .info-box {
-            background: var(--card);
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            border-radius: 0 12px 12px 0;
+            border-radius: 16px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
-        .info-box h3 { margin: 0 0 5px 0; color: var(--primary); font-size: 16px; }
-        .info-box p { margin: 0; font-size: 14px; color: #475569; }
+        header h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+        header p { margin: 8px 0 0 0; opacity: 0.9; font-size: 15px; }
+        
+        /* Stats Dashboard Panel */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .stat-card {
+            background: var(--card);
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+        }
+        .stat-num { font-size: 18px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 600; }
 
-        /* Grade Selection Styling */
+        /* Dynamic Grade Chooser Section */
         .grade-section { margin-bottom: 25px; }
-        .section-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; padding-left: 5px; }
+        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; padding-left: 5px; color: #475569; }
         .grade-tabs {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
+            scrollbar-width: none; /* Hide scrollbar for clean look */
         }
+        .grade-tabs::-webkit-scrollbar { display: none; }
         .grade-btn {
             background: var(--card);
             border: 1px solid #e2e8f0;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
             color: var(--text);
             cursor: pointer;
             white-space: nowrap;
@@ -73,17 +82,19 @@
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
-        /* Material Display Content */
+        /* Material Content Display Panel */
         .content-panel {
             background: var(--card);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
             margin-bottom: 30px;
+            border: 1px solid #f1f5f9;
         }
-        .panel-heading { font-size: 18px; margin: 0 0 15px 0; color: var(--primary); }
+        .panel-heading { font-size: 20px; margin: 0 0 18px 0; color: var(--text); font-weight: 700; }
         .resource-options {
             display: flex;
             flex-direction: column;
@@ -93,139 +104,172 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
-            background: #f1f5f9;
-            border-radius: 8px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
             text-decoration: none;
             color: var(--text);
-            font-weight: 500;
+            font-weight: 600;
             font-size: 15px;
-            transition: transform 0.2s;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
         }
-        .resource-card:active { transform: scale(0.98); }
+        .resource-card:active { transform: scale(0.98); background: #f1f5f9; }
         .resource-card span.badge {
             background: var(--secondary);
             color: white;
-            padding: 4px 8px;
+            padding: 5px 10px;
             font-size: 11px;
-            border-radius: 4px;
+            font-weight: 700;
+            border-radius: 6px;
             text-transform: uppercase;
         }
         .resource-card.sample span.badge { background: #f59e0b; }
 
-        /* Updated Team Footer Layout */
-        footer {
+        /* Massive Interactive Trivia Hub (High Scrolling Retention) */
+        .trivia-hub {
+            background: linear-gradient(135deg, #ffffff, #f5f3ff);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e9e3ff;
+        }
+        .trivia-heading { font-size: 18px; margin: 0 0 15px 0; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .live-fact-box {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            font-size: 14px;
+            font-weight: 500;
+            color: #4c1d95;
+            margin-bottom: 15px;
+        }
+        .gen-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Scrollable Infinite Feed Section */
+        .fact-feed { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
+        .feed-item {
             background: var(--card);
             border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            padding: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .feed-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .feed-item h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text); font-weight: 700; }
+        .feed-item p { margin: 0; font-size: 13.5px; color: #475569; }
+
+        /* Leadership Footer Cards */
+        footer {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 24px 15px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
             text-align: center;
-            font-size: 14px;
-            color: #64748b;
+            border: 1px solid #e2e8f0;
         }
         .team-title {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+        }
+        .team-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .member-row {
+            background: #f8fafc;
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #f1f5f9;
+        }
+        .member-name { font-weight: 700; color: #1e293b; font-size: 14px; }
+        .member-role {
             font-size: 12px;
-            letter-spacing: 1px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
         }
-        .team-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 15px 0;
-        }
-        .team-list li {
-            margin: 6px 0;
-            color: #475569;
-        }
-        .team-list strong {
-            color: var(--text);
-        }
+        .role-founder { background: #dbeafe; color: #1e40af; }
+        .role-cofounder { background: #d1fae5; color: #065f46; }
+        .role-marketing { background: #fef3c7; color: #92400e; }
+        
         .copyright {
             font-size: 12px;
             border-top: 1px solid #e2e8f0;
-            padding-top: 10px;
+            padding-top: 15px;
             margin: 0;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Header Banner -->
         <header>
             <h1>Smart Study Hub</h1>
-            <p>Your Ultimate Learning Resource</p>
+            <p>Your Ultimate Interactive Learning Network</p>
         </header>
 
-        <!-- Random Study Info Banner -->
-        <div class="info-box">
-            <h3>💡 Daily Study Tip</h3>
-            <p id="study-tip">Loading useful study tips...</p>
+        <!-- Stats Bar Overview -->
+        <div class="stats-bar">
+            <div class="stat-card"><div class="stat-num">7+</div><div class="stat-label">Grades</div></div>
+            <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">MCQs</div></div>
+            <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Free</div></div>
         </div>
 
-        <!-- Grade Chooser Options -->
+        <!-- Grade Selector Strip (Including Grades 6,7,8,9,10,11,12) -->
         <div class="grade-section">
-            <div class="section-title">Select Your Grade:</div>
+            <div class="section-title">Select Your Academic Grade:</div>
             <div class="grade-tabs">
-                <button class="grade-btn active" onclick="switchGrade('Grade 9')">Grade 9</button>
+                <button class="grade-btn active" onclick="switchGrade('Grade 6')">Grade 6</button>
+                <button class="grade-btn" onclick="switchGrade('Grade 7')">Grade 7</button>
+                <button class="grade-btn" onclick="switchGrade('Grade 8')">Grade 8</button>
+                <button class="grade-btn" onclick="switchGrade('Grade 9')">Grade 9</button>
                 <button class="grade-btn" onclick="switchGrade('Grade 10')">Grade 10</button>
                 <button class="grade-btn" onclick="switchGrade('Grade 11')">Grade 11</button>
                 <button class="grade-btn" onclick="switchGrade('Grade 12')">Grade 12</button>
             </div>
         </div>
 
-        <!-- Changing Material Panel -->
+        <!-- Material Resource Window -->
         <div class="content-panel">
-            <h2 id="current-grade-title" class="panel-heading">Grade 9 Resources</h2>
+            <h2 id="current-grade-title" class="panel-heading">Grade 6 Resources</h2>
             <div class="resource-options">
-                <a href="#" class="resource-card" onclick="alert('MCQ Practice test opening soon!')">
-                    <span>📝 Interactive MCQ Practice</span>
-                    <span class="badge">Quiz</span>
-                </a>
-                <a href="#" class="resource-card sample" onclick="alert('Downloading Sample Question Paper...')">
-                    <span>📄 Latest Sample Question Paper</span>
-                    <span class="badge">PDF</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Team Footer Section -->
-        <footer>
-            <div class="team-title">Our Leadership Team</div>
-            <ul class="team-list">
-                <li><strong>Rakshan</strong> - Founder</li>
-                <li><strong>Jeevith</strong> - Co-Founder</li>
-                <li><strong>Aditya</strong> - Marketing Head</li>
-            </ul>
-            <p class="copyright">&copy; 2026 Study Hub Portal</p>
-        </footer>
-    </div>
-
-    <script>
-        const tips = [
-            "Use the Pomodoro Technique: Study intensely for 25 minutes, then take a 5-minute break.",
-            "Teaching someone else what you just learned is one of the fastest ways to memorize it completely.",
-            "Review your handwritten notes within 24 hours of writing them to increase retention by 80%.",
-            "Keep your workspace neat. Visual clutter tricks your brain into feeling mentally exhausted.",
-            "Sleep is essential! Your brain processes and stores memories of what you studied while you sleep."
-        ];
-
-        document.getElementById('study-tip').innerText = tips[Math.floor(Math.random() * tips.length)];
-
-        function switchGrade(gradeName) {
-            document.getElementById('current-grade-title').innerText = gradeName + " Resources";
-            
-            const buttons = document.querySelectorAll('.grade-btn');
-            buttons.forEach(btn => {
-                if(btn.innerText === gradeName) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+                <a href="#" class="resource-card" onclick="alert('MCQ Practice test database loading...')">
+                    <span>📝 Launch Interactive MCQ Test</span>
+                    <span class="badge">Quiz Portal</span>
+    </a>
+    
