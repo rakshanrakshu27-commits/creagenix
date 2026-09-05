@@ -3,51 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Mobile Website</title>
+    <title>Study Portal</title>
     <style>
-        /* EDIT YOUR COLORS HERE */
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+        }
         body {
-            background-color: #f4f7f6; /* Page Background Color */
-            color: #333333;            /* Main Text Color */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
+            background-color: var(--background);
+            color: var(--text);
             margin: 0;
+            padding: 15px;
+            line-height: 1.5;
         }
         .container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #ffffff;       /* Card Background Color */
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 500px;
+            margin: 0 auto 40px auto;
         }
-        h1 { color: #1a73e8; }         /* Heading Color */
-        h2 { color: #34a853; border-bottom: 2px solid #eeeeee; padding-bottom: 5px; }
-        .btn {
-            display: inline-block;
-            background-color: #1a73e8; /* Button Color */
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        header h1 { margin: 0; font-size: 24px; }
+        header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 14px; }
+        
+        /* Info Box */
+        .info-box {
+            background: var(--card);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .info-box h3 { margin: 0 0 5px 0; color: var(--primary); font-size: 16px; }
+        .info-box p { margin: 0; font-size: 14px; color: #475569; }
+
+        /* Grade Selection Styling */
+        .grade-section { margin-bottom: 25px; }
+        .section-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; padding-left: 5px; }
+        .grade-tabs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        .grade-btn {
+            background: var(--card);
+            border: 1px solid #e2e8f0;
             padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .grade-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Material Display Content */
+        .content-panel {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .panel-heading { font-size: 18px; margin: 0 0 15px 0; color: var(--primary); }
+        .resource-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .resource-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 8px;
             text-decoration: none;
-            border-radius: 6px;
-            margin-top: 15px;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 15px;
+            transition: transform 0.2s;
+        }
+        .resource-card:active { transform: scale(0.98); }
+        .resource-card span.badge {
+            background: var(--secondary);
+            color: white;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .resource-card.sample span.badge { background: #f59e0b; }
+
+        /* Updated Team Footer Layout */
+        footer {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+        }
+        .team-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .team-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+        .team-list li {
+            margin: 6px 0;
+            color: #475569;
+        }
+        .team-list strong {
+            color: var(--text);
+        }
+        .copyright {
+            font-size: 12px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+            margin: 0;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- EDIT OR ADD TEXT HERE -->
-        <h1>Welcome to My Website</h1>
-        <p>This website was created entirely on a mobile phone using Gemini, GitHub, and Netlify!</p>
-        
-        <h2>About My Project</h2>
-        <p>You can change this text, delete it, or add completely new paragraphs whenever you want.</p>
-        
-        <a href="#" class="btn">Click Me</a>
+        <header>
+            <h1>Smart Study Hub</h1>
+            <p>Your Ultimate Learning Resource</p>
+        </header>
+
+        <!-- Random Study Info Banner -->
+        <div class="info-box">
+            <h3>💡 Daily Study Tip</h3>
+            <p id="study-tip">Loading useful study tips...</p>
+        </div>
+
+        <!-- Grade Chooser Options -->
+        <div class="grade-section">
+            <div class="section-title">Select Your Grade:</div>
+            <div class="grade-tabs">
+                <button class="grade-btn active" onclick="switchGrade('Grade 9')">Grade 9</button>
+                <button class="grade-btn" onclick="switchGrade('Grade 10')">Grade 10</button>
+                <button class="grade-btn" onclick="switchGrade('Grade 11')">Grade 11</button>
+                <button class="grade-btn" onclick="switchGrade('Grade 12')">Grade 12</button>
+            </div>
+        </div>
+
+        <!-- Changing Material Panel -->
+        <div class="content-panel">
+            <h2 id="current-grade-title" class="panel-heading">Grade 9 Resources</h2>
+            <div class="resource-options">
+                <a href="#" class="resource-card" onclick="alert('MCQ Practice test opening soon!')">
+                    <span>📝 Interactive MCQ Practice</span>
+                    <span class="badge">Quiz</span>
+                </a>
+                <a href="#" class="resource-card sample" onclick="alert('Downloading Sample Question Paper...')">
+                    <span>📄 Latest Sample Question Paper</span>
+                    <span class="badge">PDF</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Team Footer Section -->
+        <footer>
+            <div class="team-title">Our Leadership Team</div>
+            <ul class="team-list">
+                <li><strong>Rakshan</strong> - Founder</li>
+                <li><strong>Jeevith</strong> - Co-Founder</li>
+                <li><strong>Aditya</strong> - Marketing Head</li>
+            </ul>
+            <p class="copyright">&copy; 2026 Study Hub Portal</p>
+        </footer>
     </div>
 
+    <script>
+        const tips = [
+            "Use the Pomodoro Technique: Study intensely for 25 minutes, then take a 5-minute break.",
+            "Teaching someone else what you just learned is one of the fastest ways to memorize it completely.",
+            "Review your handwritten notes within 24 hours of writing them to increase retention by 80%.",
+            "Keep your workspace neat. Visual clutter tricks your brain into feeling mentally exhausted.",
+            "Sleep is essential! Your brain processes and stores memories of what you studied while you sleep."
+        ];
+
+        document.getElementById('study-tip').innerText = tips[Math.floor(Math.random() * tips.length)];
+
+        function switchGrade(gradeName) {
+            document.getElementById('current-grade-title').innerText = gradeName + " Resources";
+            
+            const buttons = document.querySelectorAll('.grade-btn');
+            buttons.forEach(btn => {
+                if(btn.innerText === gradeName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+    </script>
 </body>
-  </html>
-  
+</html>
