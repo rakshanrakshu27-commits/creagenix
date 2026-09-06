@@ -1,146 +1,328 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CreaGenix - Elevate Your Learning</title>
+    <title>CreaGenix - Next-Gen Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --secondary: #7c3aed;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a855f7;
+            --accent: #06b6d4;
+            --background: #090d16;
+            --surface: #111827;
+            --surface-card: #1f2937;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.08);
+            --success: #10b981;
+            --danger: #ef4444;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: var(--background);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
+        /* Glassmorphism Navigation */
+        nav {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .logo-container {
+        .brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 0.5rem;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
         }
 
         .gemini-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        nav {
-            background: white;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--dark);
-            text-decoration: none;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 0.35rem 0.85rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
             font-weight: 600;
+            color: #c084fc;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Header */
+        header {
+            padding: 4rem 1rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Layout Container */
         .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
         .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Grades Grid */
+        /* Grade Cards Grid */
         .grades-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .grade-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grade-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .grade-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .grade-card:hover::before {
+            opacity: 1;
         }
 
         .grade-card h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
 
         .btn-group {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
         .btn {
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 10px;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
             text-decoration: none;
             font-size: 0.9rem;
         }
 
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-secondary { background: #e2e8f0; color: var(--dark); }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
 
-        /* Content Pages */
-        .article-page {
-            background: white;
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--surface-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Modal Overlay for Interactive Engine */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            max-width: 750px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
             padding: 2rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.25rem; right: 1.25rem;
+            background: var(--surface-card);
+            border: none;
+            color: var(--text-muted);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Interactive MCQ Component */
+        .question-block {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
             border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-label:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .option-label input {
+            margin-right: 12px;
+            accent-color: var(--primary);
+        }
+
+        .result-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        /* Content Articles */
+        .article-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         /* Premium Section */
         .premium-card {
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            color: white;
-            padding: 2.5rem;
-            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 20px;
+            padding: 3rem 2rem;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .qr-card-container {
@@ -148,184 +330,218 @@
             background: white;
             margin: 1.5rem auto;
             padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
         }
 
         .qr-card-container img {
             width: 100%;
-            height: auto;
-            border-radius: 6px;
+            border-radius: 8px;
             display: block;
         }
 
-        .upi-id {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
+        .upi-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.25rem;
+            border-radius: 99px;
             display: inline-block;
             margin-top: 0.5rem;
             font-family: monospace;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            border: 1px solid var(--border);
         }
 
-        /* Leaderboard */
+        /* Leadership Board */
         .leaderboard {
-            background: white;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
-        .leaderboard-item {
+        .leader-item {
             display: flex;
             justify-content: space-between;
-            padding: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .leader-item:last-child {
+            border-bottom: none;
+        }
+
+        .role-tag {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--accent);
         }
 
         footer {
+            border-top: 1px solid var(--border);
             text-align: center;
             padding: 2rem;
-            background: var(--dark);
-            color: white;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <h1>CreaGenix</h1>
+    <nav>
+        <div class="brand" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <span>CreaGenix</span>
         </div>
         <div class="gemini-badge">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-            Integrated with Gemini AI
+            Gemini AI Integration
         </div>
-        <p style="margin-top: 10px;">Master Your Studies from Grades 6 to 12</p>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="#resources">Grade Resources</a></li>
-            <li><a href="#page1">Active Recall</a></li>
-            <li><a href="#page2">Feynman Technique</a></li>
-            <li><a href="#premium">Go Premium</a></li>
+        <ul class="nav-links">
+            <li><a href="#resources">Grades</a></li>
+            <li><a href="#guides">Guides</a></li>
+            <li><a href="#premium">Premium</a></li>
             <li><a href="#leadership">Leadership</a></li>
         </ul>
     </nav>
 
+    <header>
+        <h1>Smart Learning for Grades 6–12</h1>
+        <p>Interactive MCQs, comprehensive sample papers, and AI-driven explanations designed for academic excellence.</p>
+    </header>
+
     <div class="container">
         
         <section id="resources">
-            <h2 class="section-title">Academic Resources</h2>
-            <div class="grades-grid">
-                <div class="grade-card">
-                    <h3>Grade 6</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
+            <h2 class="section-title">Select Your Grade</h2>
+            <div class="grades-grid" id="gradesGrid">
                 </div>
-                <div class="grade-card">
-                    <h3>Grade 7</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
-                </div>
-                <div class="grade-card">
-                    <h3>Grade 8</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
-                </div>
-                <div class="grade-card">
-                    <h3>Grade 9</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
-                </div>
-                <div class="grade-card">
-                    <h3>Grade 10</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
-                </div>
-                <div class="grade-card">
-                    <h3>Grade 11</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
-                </div>
-                <div class="grade-card">
-                    <h3>Grade 12</h3>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Take MCQs</a>
-                        <a href="#" class="btn btn-secondary">Sample Papers</a>
-                    </div>
-                </div>
+        </section>
+
+        <section id="guides">
+            <div class="article-card">
+                <h2>Study Guide: The Power of Active Recall</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Active recall is a proven principle of efficient learning. By retrieving information actively rather than passively re-reading text, you build robust neural pathways. Using the practice tests on CreaGenix strengthens long-term memory retrieval for exam success.</p>
+            </div>
+            <div class="article-card">
+                <h2>Study Guide: The Feynman Technique</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Master complex STEM concepts using four simple steps: Choose a topic, explain it in simple terms as if teaching a beginner, identify knowledge gaps when you stall, and refine your explanation until it is clear and seamless.</p>
             </div>
         </section>
 
-        <article id="page1" class="article-page">
-            <h2>Study Guide: The Power of Active Recall</h2>
-            <p style="margin-top: 1rem;">Active recall is a principle of efficient learning, which claims the need to actively stimulate memory retrieval during the learning process. It contrasts with passive review, where learning material is processed passively (e.g., by reading or watching).</p>
-            <p style="margin-top: 1rem;">Testing yourself through practice questions, such as the MCQs provided on CreaGenix, forces your brain to retrieve information, creating stronger neural connections and improving long-term memory retention.</p>
-        </article>
-
-        <article id="page2" class="article-page">
-            <h2>Study Guide: The Feynman Technique</h2>
-            <p style="margin-top: 1rem;">The Feynman Technique is a four-step process for understanding any concept deeply:</p>
-            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                <li><strong>Choose a concept:</strong> Pick a topic you want to learn.</li>
-                <li><strong>Teach it to a child:</strong> Explain it in simple terms as if to someone with no background knowledge.</li>
-                <li><strong>Identify gaps:</strong> Locate where you struggle in your explanation and revisit source material.</li>
-                <li><strong>Review and simplify:</strong> Refine your explanation until simple and clear.</li>
-            </ul>
-        </article>
-
         <section id="premium" class="premium-card">
-            <h2>Upgrade to CreaGenix Premium</h2>
-            <p style="margin-top: 0.5rem;">Unlock Interactive Diagrams & 24/7 AI Doubt Clarification powered by Gemini!</p>
-            <h3 style="font-size: 2rem; margin-top: 1rem;">₹99 <span style="font-size: 1rem;">/ One-time Access</span></h3>
+            <h2>Unlock CreaGenix Premium</h2>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Get interactive visual diagrams, 24/7 Gemini AI Doubt Solver, and complete step-by-step solution keys.</p>
+            <h3 style="font-size: 2.5rem; margin-top: 1rem;">₹99 <span style="font-size: 1rem; color: var(--text-muted);">/ One-Time</span></h3>
             
             <div class="qr-card-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=8618011545@fam&pn=Aditya%20P%20N&am=99" alt="UPI Payment QR Code - Aditya P N">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=8618011545@fam&pn=Aditya%20P%20N&am=99" alt="UPI QR Code">
             </div>
             
-            <p>Payee: <strong>Aditya P N</strong></p>
-            <div class="upi-id">UPI ID: 8618011545@fam</div>
-            <p style="margin-top: 0.8rem;">Scan using any UPI App to Pay ₹99</p>
-            <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.5rem;">Includes visual concept maps, step-by-step diagram explanations, and instant Q&A doubt solving.</p>
+            <p style="font-weight: 600;">Payee: Aditya P N</p>
+            <div class="upi-badge">8618011545@fam</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Scan with any UPI app (GPay, PhonePe, Paytm) to activate instant access.</p>
         </section>
 
         <section id="leadership" class="leaderboard">
             <h2 class="section-title">Leadership Team</h2>
-            <div class="leaderboard-item">
-                <span><strong>Rakshan</strong></span>
-                <span>Founder</span>
+            <div class="leader-item">
+                <span style="font-weight: 700;">Rakshan</span>
+                <span class="role-tag">Founder</span>
             </div>
-            <div class="leaderboard-item">
-                <span><strong>Jeevith</strong></span>
-                <span>Co-Founder</span>
+            <div class="leader-item">
+                <span style="font-weight: 700;">Jeevith</span>
+                <span class="role-tag">Co-Founder</span>
             </div>
-            <div class="leaderboard-item">
-                <span><strong>Aditya</strong></span>
-                <span>Marketing Head</span>
+            <div class="leader-item">
+                <span style="font-weight: 700;">Aditya</span>
+                <span class="role-tag">Marketing Head</span>
             </div>
         </section>
 
+    </div>
+
+    <div class="modal-overlay" id="interactiveModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2026 CreaGenix. Powered by Gemini AI. All rights reserved.</p>
     </footer>
 
-</body>
-</html>
-                                          
+    <script>
+        // Sample Question Database
+        const db = {
+            mcq: {
+                6: [
+                    { q: "What is the primary process by which plants make food?", o: ["Respiration", "Photosynthesis", "Transpiration", "Fermentation"], a: 1 },
+                    { q: "Which gas do animals breathe in for survival?", o: ["Carbon Dioxide", "Nitrogen", "Oxygen", "Hydrogen"], a: 2 }
+                ],
+                7: [
+                    { q: "What is the SI unit of speed?", o: ["km/h", "m/s", "m/s²", "cm/s"], a: 1 },
+                    { q: "Which acid is present in lemon juice?", o: ["Acetic Acid", "Citric Acid", "Lactic Acid", "Tartaric Acid"], a: 1 }
+                ],
+                8: [
+                    { q: "Which organelle is called the powerhouse of the cell?", o: ["Nucleus", "Ribosome", "Mitochondria", "Golgi Body"], a: 2 },
+                    { q: "What is the force acting per unit area called?", o: ["Work", "Pressure", "Energy", "Friction"], a: 1 }
+                ],
+                9: [
+                    { q: "What is the value of acceleration due to gravity on Earth?", o: ["9.8 m/s²", "10.8 m/s²", "8.9 m/s²", "9.8 cm/s²"], a: 0 },
+                    { q: "Which element has atomic number 1?", o: ["Helium", "Hydrogen", "Lithium", "Carbon"], a: 1 }
+                ],
+                10: [
+                    { q: "What is the chemical formula of Rust?", o: ["Fe2O3.xH2O", "Fe3O4", "FeO", "FeCO3"], a: 0 },
+                    { q: "Which lens is used to correct Myopia?", o: ["Convex Lens", "Concave Lens", "Bifocal Lens", "Cylindrical Lens"], a: 1 }
+                ],
+                11: [
+                    { q: "What is the SI unit of electric charge?", o: ["Ampere", "Volt", "Coulomb", "Ohm"], a: 2 },
+                    { q: "Which functional group represents alcohols?", o: ["-CHO", "-COOH", "-OH", "-CO-"], a: 2 }
+                ],
+                12: [
+                    { q: "What is the derivative of sin(x) with respect to x?", o: ["-cos(x)", "cos(x)", "-sin(x)", "tan(x)"], a: 1 },
+                    { q: "Which phenomenon proves the wave nature of light?", o: ["Photoelectric Effect", "Interference", "Compton Effect", "Blackbody Radiation"], a: 1 }
+                ]
+            },
+            papers: {
+                6: "Grade 6 Science & Math Mock Paper\nTime: 2 Hours | Max Marks: 80\n\nSection A: Short Answer Questions\n1. Explain the process of condensation with an example.\n2. Define Balanced Diet and list its components.\n\nSection B: Problem Solving\n3. Find the perimeter of a rectangle with length 12 cm and breadth 8 cm.",
+                7: "Grade 7 Science & Math Mock Paper\nTime: 2 Hours | Max Marks: 80\n\nSection A: Chemistry & Physics\n1. Differentiate between physical and chemical changes.\n2. State Newton's First Law of Motion with an everyday example.",
+                8: "Grade 8 Board Preparation Paper\nTime: 3 Hours | Max Marks: 100\n\nSection A: Biology & Physics\n1. Describe the structure of a plant cell with a labeled diagram.\n2. Calculate the force required to accelerate a 5 kg mass at 2 m/s².",
+                9: "Grade 9 Mid-Term Comprehensive Paper\nTime: 3 Hours | Max Marks: 100\n\n1. Derive the equation of motion v² = u² + 2as algebraically.\n2. Balance the chemical equation: Fe + H2O -> Fe3O4 + H2.",
+                10: "Grade 10 Model Examination Paper\nTime: 3 Hours | Max Marks: 80\n\n1. State Ohm's Law and draw its V-I graph circuit diagram.\n2. Prove that √5 is an irrational number.",
+                11: "Grade 11 Physics & Chemistry Standard Paper\nTime: 3 Hours | Max Marks: 70\n\n1. State and prove the Work-Energy Theorem.\n2. Write IUPAC names for CH3-CH2-CH=CH2 and CH3-COOH.",
+                12: "Grade 12 Senior Secondary Board Mock Paper\nTime: 3 Hours | Max Marks: 70\n\n1. State Gauss's Law in electrostatics and derive the field due to an infinite line charge.\n2. Evaluate ∫(x · e^x) dx using integration by parts."
+            }
+        };
+
+        // Render Cards
+        const grid = document.getElementById('gradesGrid');
+        for (let g = 6; g <= 12; g++) {
+            grid.innerHTML += `
+                <div class="grade-card">
+                    <h3>Grade ${g}</h3>
+                    <p>Access customized MCQs and downloadable examination paper sets.</p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="openMCQ(${g})">Solve MCQs</button>
+                        <button class="btn btn-secondary" onclick="openPaper(${g})">Sample Paper</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Modal Controls
+        function openMCQ(grade) {
+            const modal = document.getElementById('interactiveModal');
+            const body = document.getElementById('modalBody');
+            const questions = db.mcq[grade] || [];
+
+            let html = `<h2>Grade ${grade} MCQ Test Engine</h2><p style="color:var(--text-muted); margin-bottom:1.5rem;">Select your answers and click submit to evaluate your performance.</p><form id="quizForm">`;
+
+            questions.forEach((q, idx) => {
+                html += `
+                    <div class="question-block">
+                        <div c                      .                
