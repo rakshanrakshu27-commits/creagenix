@@ -1,301 +1,318 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Study Hub</title>
+    <title>CreaGenix - Elevate Your Learning</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #10b981;
-            --background: #f8fafc;
-            --text: #1e293b;
-            --card: #ffffff;
-            --accent: #8b5cf6;
-            --premium-color: #f59e0b;
+            --primary: #4f46e5;
+            --secondary: #7c3aed;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 15px;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
-        .container {
-            max-width: 550px;
-            margin: 0 auto 40px auto;
-        }
+
         header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
             text-align: center;
-            padding: 30px 15px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        }
-        header h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
-        header p { margin: 8px 0 0 0; opacity: 0.9; font-size: 15px; }
-        
-        .grade-section { margin-bottom: 25px; }
-        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; padding-left: 5px; color: #475569; }
-        .grade-tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-        }
-        .grade-btn {
-            background: var(--card);
-            border: 1px solid #e2e8f0;
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .grade-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
         }
 
-        .content-panel {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-        }
-        .panel-heading { font-size: 20px; margin: 0 0 18px 0; color: var(--text); font-weight: 700; }
-        .resource-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .resource-card {
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 16px;
-            background: #f8fafc;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-        }
-        .resource-card span.badge {
-            background: var(--secondary);
-            color: white;
-            padding: 5px 10px;
-            font-size: 11px;
-            border-radius: 6px;
-        }
-        .resource-card.sample span.badge { background: #f59e0b; }
-        
-        /* Premium locked/unlocked cards styles */
-        .resource-card.premium-locked {
-            opacity: 0.6;
-            background: #f1f5f9;
-            cursor: not-allowed;
-        }
-        .resource-card.premium-locked span.badge {
-            background: #64748b;
-        }
-
-        /* Premium Box Styles */
-        .premium-panel {
-            background: linear-gradient(135deg, #fffbeb, #fff7ed);
-            border: 2px dashed var(--premium-color);
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.1);
-            margin-bottom: 30px;
-            position: relative;
-        }
-        .premium-badge-top {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--premium-color);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-        .premium-features {
-            padding-left: 20px;
-            margin: 15px 0;
-            font-size: 14px;
-        }
-        .premium-features li {
-            margin-bottom: 8px;
-        }
-        .pay-now-btn {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, #d97706, var(--premium-color));
-            color: white;
-            text-align: center;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-        .pay-now-btn.unlocked {
-            background: #10b981;
-            cursor: default;
-        }
-
-        /* POPUP MODAL WINDOW FOR UPI SCANNING */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 1000;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            gap: 10px;
+            margin-bottom: 0.5rem;
         }
-        .modal-box {
-            background: white;
+
+        .gemini-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.8rem;
             border-radius: 20px;
-            padding: 25px;
-            max-width: 400px;
-            width: 100%;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
             text-align: center;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
+            margin-bottom: 2rem;
+            color: var(--primary);
         }
-        .modal-close {
-            position: absolute;
-            top: 15px; right: 15px;
-            background: #f1f5f9; border: none;
-            border-radius: 50%; width: 30px; height: 30px;
-            font-weight: bold; cursor: pointer;
+
+        /* Grades Grid */
+        .grades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
+
+        .grade-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .grade-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { background: #e2e8f0; color: var(--dark); }
+
+        /* Content Pages */
+        .article-page {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Premium Section */
+        .premium-card {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
         .qr-placeholder {
             width: 180px;
             height: 180px;
-            margin: 15px auto;
-            background: #ffffff;
+            background: white;
+            margin: 1.5rem auto;
             padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .payment-input {
-            width: 100%; padding: 12px; margin: 15px 0 10px 0;
-            border: 1px solid #cbd5e1; border-radius: 8px;
-            font-size: 14px; text-align: center; box-sizing: border-box;
+            color: black;
+            font-weight: bold;
         }
 
-        .fact-feed { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
-        .feed-item {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-        }
-        .feed-tag {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-        .feed-item h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text); }
-        .feed-item p { margin: 0; font-size: 13.5px; color: #475569; }
-
-        .top-team-box {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 20px 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-        .team-title {
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-        .team-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .member-row {
-            background: #f8fafc;
-            padding: 8px 12px;
+        /* Leaderboard */
+        .leaderboard {
+            background: white;
+            padding: 2rem;
             border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .leaderboard-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border: 1px solid #f1f5f9;
+            padding: 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
         }
-        .member-name { font-weight: 700; color: #1e293b; font-size: 13.5px; }
-        .member-role {
-            font-size: 11px;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 5px;
-        }
-        .role-founder { background: #dbeafe; color: #1e40af; }
-        .role-cofounder { background: #d1fae5; color: #065f46; }
-        .role-marketing { background: #fef3c7; color: #92400e; }
 
         footer {
             text-align: center;
-            padding: 20px;
-            color: #94a3b8;
-            font-size: 12px;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Smart Study Hub</h1>
-            <p>Your Ultimate Interactive Learning Network</p>
-        </header>
-
-        <!-- Grade Selector -->
-        <div class="grade-section">
-            <div class="section-title">Select Your Academic Grade:</div>
-            <div class="grade-tabs">
-                <button class="grade-btn active" onclick="switchGrade(this, 'Grade 6')">Grade 6</button>
-                <button class="grade-btn" onclick="switchGrade(this, 'Grade 7')">Grade 7</button>
-                <button class="grade-btn" onclick="switchGrade(this, 'Grade 8')">Grade 8</button>
-                <button class="grade-btn" onclick="switchGrade(this, 'Grade 9')">Grade 9</button>
-                <button class="grade-btn" onclick="switchGrade(this, 'Grade 10')">Grade 10</button>
-                <button class="grade-btn" onclick="switchGrade(this, 'Grade 11')">Grade 11</button>
-                <button class="grade-btn" onclick="switchGrade(this, 'Grade 12')">Grade 12</button>
-            </div>
+    <header>
+        <div class="logo-container">
+            <h1>CreaGenix</h1>
         </div>
+        <div class="gemini-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
+            Integrated with Gemini AI
+        </div>
+        <p style="margin-top: 10px;">Master Your Studies from Grades 6 to 12</p>
+    </header>
 
-        <!-- Resource Area -->
-        <div class="content-panel">
-  
+    <nav>
+        <ul>
+            <li><a href="#resources">Grade Resources</a></li>
+            <li><a href="#page1">Active Recall</a></li>
+            <li><a href="#page2">Feynman Technique</a></li>
+            <li><a href="#premium">Go Premium</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <section id="resources">
+            <h2 class="section-title">Academic Resources</h2>
+            <div class="grades-grid">
+                <div class="grade-card">
+                    <h3>Grade 6</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+                <div class="grade-card">
+                    <h3>Grade 7</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+                <div class="grade-card">
+                    <h3>Grade 8</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+                <div class="grade-card">
+                    <h3>Grade 9</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+                <div class="grade-card">
+                    <h3>Grade 10</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+                <div class="grade-card">
+                    <h3>Grade 11</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+                <div class="grade-card">
+                    <h3>Grade 12</h3>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Take MCQs</a>
+                        <a href="#" class="btn btn-secondary">Sample Papers</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <article id="page1" class="article-page">
+            <h2>Study Guide: The Power of Active Recall</h2>
+            <p style="margin-top: 1rem;">Active recall is a principle of efficient learning, which claims the need to actively stimulate memory retrieval during the learning process. It contrasts with passive review, where learning material is processed passively (e.g., by reading or watching).</p>
+            <p style="margin-top: 1rem;">Testing yourself through practice questions, such as the MCQs provided on CreaGenix, forces your brain to retrieve information, creating stronger neural connections and improving long-term memory retention.</p>
+        </article>
+
+        <article id="page2" class="article-page">
+            <h2>Study Guide: The Feynman Technique</h2>
+            <p style="margin-top: 1rem;">The Feynman Technique is a four-step process for understanding any concept deeply:</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li><strong>Choose a concept:</strong> Pick a topic you want to learn.</li>
+                <li><strong>Teach it to a child:</strong> Explain it in simple terms as if to someone with no background knowledge.</li>
+                <li><strong>Identify gaps:</strong> Locate where you struggle in your explanation and revisit source material.</li>
+                <li><strong>Review and simplify:</strong> Refine your explanation until simple and clear.</li>
+            </ul>
+        </article>
+
+        <section id="premium" class="premium-card">
+            <h2>Upgrade to CreaGenix Premium</h2>
+            <p style="margin-top: 0.5rem;">Unlock Interactive Diagrams & 24/7 AI Doubt Clarification powered by Gemini!</p>
+            <h3 style="font-size: 2rem; margin-top: 1rem;">₹99 <span style="font-size: 1rem;">/ One-time Access</span></h3>
+            
+            <div class="qr-placeholder">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=creagenix@upi&pn=CreaGenix&am=99" alt="UPI Payment QR Code" style="width: 100%; height: 100%;">
+            </div>
+            <p>Scan using any UPI App to Pay ₹99</p>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.5rem;">Includes visual concept maps, step-by-step diagram explanations, and instant Q&A doubt solving.</p>
+        </section>
+
+        <section id="leadership" class="leaderboard">
+            <h2 class="section-title">Leadership Team</h2>
+            <div class="leaderboard-item">
+                <span><strong>Rakshan</strong></span>
+                <span>Founder</span>
+            </div>
+            <div class="leaderboard-item">
+                <span><strong>Jeevith</strong></span>
+                <span>Co-Founder</span>
+            </div>
+            <div class="leaderboard-item">
+                <span><strong>Aditya</strong></span>
+                <span>Marketing Head</span>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CreaGenix. Powered by Gemini AI. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+
+```
